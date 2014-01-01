@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "FlipsideViewController.h"
 
 @interface MainViewController ()
 @end
@@ -23,7 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.view.backgroundColor = [UIColor whiteColor];
     
     m_scrollView = [[UIScrollView alloc] init];
     m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
@@ -33,9 +33,9 @@
     m_scrollView.showsVerticalScrollIndicator = NO;
     m_scrollView.showsHorizontalScrollIndicator = NO;
     m_scrollView.scrollEnabled = YES;
+    // m_scrollView.userInteractionEnabled = NO;
     
     // Generate content for our scroll view using the frame height and width as the reference point
-    
     int i = 1;
     int decibal = -25;
     while (i<=11)
@@ -59,6 +59,15 @@
     
     [self.view addSubview:m_scrollView];
     [self.view insertSubview:lineView aboveSubview:m_scrollView];
+    
+    UIButton *toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    CGRect buttonRect = toggleButton.frame;
+    buttonRect.origin.x = self.view.frame.size.width-buttonRect.size.width - 8;
+    buttonRect.origin.y = buttonRect.size.height + 4;
+    toggleButton.frame = buttonRect;
+    
+    [toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:toggleButton];
 }
 
 #pragma mark - Flipside View Controller
@@ -91,7 +100,7 @@
     }
 }
 
-- (IBAction)togglePopover:(id)sender
+- (void)togglePopover:(id)sender
 {
     if (self.flipsidePopoverController)
     {
@@ -100,7 +109,17 @@
     }
     else
     {
-        [self performSegueWithIdentifier:@"showAlternate" sender:sender];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        {
+            UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)sender popoverController];
+            self.flipsidePopoverController = popoverController;
+            popoverController.delegate = self;
+        }
+        else
+        {
+            FlipsideViewController *flipSideViewController = [[FlipsideViewController alloc] init];
+            [self presentViewController:flipSideViewController animated:YES completion:nil];
+        }
     }
 }
 
