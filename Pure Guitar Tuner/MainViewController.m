@@ -13,6 +13,9 @@
 @end
 
 @implementation MainViewController
+{
+    UIButton *m_toggleButton;
+}
 
 @synthesize scrollView = m_scrollView;
 
@@ -60,14 +63,22 @@
     [self.view addSubview:m_scrollView];
     [self.view insertSubview:lineView aboveSubview:m_scrollView];
     
-    UIButton *toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    CGRect buttonRect = toggleButton.frame;
+    m_toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    CGRect buttonRect = m_toggleButton.frame;
     buttonRect.origin.x = self.view.frame.size.width-buttonRect.size.width - 8;
     buttonRect.origin.y = buttonRect.size.height + 4;
-    toggleButton.frame = buttonRect;
+    m_toggleButton.frame = buttonRect;
     
-    [toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:toggleButton];
+    [m_toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:m_toggleButton];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
+    NSLog(@"origin: %f", m_scrollView.contentOffset.x);
+    NSLog(@"origin: %f", m_scrollView.contentOffset.y);
+    [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
 }
 
 #pragma mark - Flipside View Controller
@@ -85,21 +96,6 @@
     self.flipsidePopoverController = nil;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showAlternate"])
-    {
-        [[segue destinationViewController] setDelegate:self];
-        
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        {
-            UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
-            self.flipsidePopoverController = popoverController;
-            popoverController.delegate = self;
-        }
-    }
-}
-
 - (void)togglePopover:(id)sender
 {
     if (self.flipsidePopoverController)
@@ -109,11 +105,14 @@
     }
     else
     {
+        FlipsideViewController *flipSideViewController = [[FlipsideViewController alloc] init];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         {
-            UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)sender popoverController];
+            UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:flipSideViewController];
+            popoverController.popoverContentSize = CGSizeMake(444, 425);
             self.flipsidePopoverController = popoverController;
             popoverController.delegate = self;
+            [popoverController presentPopoverFromRect:m_toggleButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         }
         else
         {

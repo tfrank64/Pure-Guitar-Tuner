@@ -28,16 +28,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 22, self.view.bounds.size.width, 44)];
-    [self.view addSubview:navBar];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
-    UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Options"];
-    navBar.barTintColor = [UIColor colorWithRed:36.0/255.0 green:42.0/255.0 blue:50.0/255.0 alpha:1];
-    navItem.leftBarButtonItem = doneButton;
-    navBar.items = @[navItem];
-    
-	self.view.backgroundColor = [UIColor blackColor];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 22, self.view.bounds.size.width, 44)];
+        [self.view addSubview:navBar];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+        UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"Options"];
+        navBar.barTintColor = [UIColor colorWithRed:36.0/255.0 green:42.0/255.0 blue:50.0/255.0 alpha:1];
+        navItem.leftBarButtonItem = doneButton;
+        navBar.items = @[navItem];
+        self.view.backgroundColor = [UIColor blackColor];
+    }
 }
 
 #pragma mark - Actions
