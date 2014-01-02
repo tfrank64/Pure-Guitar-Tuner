@@ -23,6 +23,13 @@
 		6B46FD4B1872175B00D51922 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B46FD271872175B00D51922 /* UIKit.framework */; };
 		6B46FD531872175B00D51922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B46FD511872175B00D51922 /* InfoPlist.strings */; };
 		6B46FD551872175B00D51922 /* Pure_Guitar_TunerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B46FD541872175B00D51922 /* Pure_Guitar_TunerTests.m */; };
+		6B88E26818761DA000257D0C /* KeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B88E26518761DA000257D0C /* KeyHelper.m */; };
+		6B88E26918761DA000257D0C /* RIOInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6B88E26718761DA000257D0C /* RIOInterface.mm */; };
+		6B88E27018761E6F00257D0C /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B88E26E18761E6F00257D0C /* CAXException.cpp */; };
+		6B88E27318761F7100257D0C /* SafeSoundAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B88E27218761F7100257D0C /* SafeSoundAppDelegate.m */; };
+		6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2741876203400257D0C /* CoreAudio.framework */; };
+		6B88E2771876204C00257D0C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2761876204C00257D0C /* AVFoundation.framework */; };
+		6B88E2791876205A00257D0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2781876205A00257D0C /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +65,20 @@
 		6B46FD501872175B00D51922 /* Pure Guitar TunerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pure Guitar TunerTests-Info.plist"; sourceTree = "<group>"; };
 		6B46FD521872175B00D51922 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B46FD541872175B00D51922 /* Pure_Guitar_TunerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pure_Guitar_TunerTests.m; sourceTree = "<group>"; };
+		6B88E26418761DA000257D0C /* KeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyHelper.h; sourceTree = "<group>"; };
+		6B88E26518761DA000257D0C /* KeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyHelper.m; sourceTree = "<group>"; };
+		6B88E26618761DA000257D0C /* RIOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIOInterface.h; sourceTree = "<group>"; };
+		6B88E26718761DA000257D0C /* RIOInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RIOInterface.mm; sourceTree = "<group>"; };
+		6B88E26C18761E6F00257D0C /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		6B88E26D18761E6F00257D0C /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		6B88E26E18761E6F00257D0C /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		6B88E26F18761E6F00257D0C /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		6B88E27118761F7100257D0C /* SafeSoundAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeSoundAppDelegate.h; sourceTree = "<group>"; };
+		6B88E27218761F7100257D0C /* SafeSoundAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafeSoundAppDelegate.m; sourceTree = "<group>"; };
+		6B88E2741876203400257D0C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		6B88E2761876204C00257D0C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6B88E2781876205A00257D0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6B88E27A187620D600257D0C /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +86,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B88E2791876205A00257D0C /* AudioToolbox.framework in Frameworks */,
+				6B88E2771876204C00257D0C /* AVFoundation.framework in Frameworks */,
+				6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */,
 				6B46FD261872175B00D51922 /* CoreGraphics.framework in Frameworks */,
 				6B46FD281872175B00D51922 /* UIKit.framework in Frameworks */,
 				6B46FD241872175B00D51922 /* Foundation.framework in Frameworks */,
@@ -87,6 +111,8 @@
 		6B46FD171872175B00D51922 = {
 			isa = PBXGroup;
 			children = (
+				6B88E26A18761E5500257D0C /* Other */,
+				6B88E26318761D8400257D0C /* Singletons */,
 				6B46FD291872175B00D51922 /* Pure Guitar Tuner */,
 				6B46FD4E1872175B00D51922 /* Pure Guitar TunerTests */,
 				6B46FD221872175B00D51922 /* Frameworks */,
@@ -106,6 +132,9 @@
 		6B46FD221872175B00D51922 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B88E2781876205A00257D0C /* AudioToolbox.framework */,
+				6B88E2761876204C00257D0C /* AVFoundation.framework */,
+				6B88E2741876203400257D0C /* CoreAudio.framework */,
 				6B46FD231872175B00D51922 /* Foundation.framework */,
 				6B46FD251872175B00D51922 /* CoreGraphics.framework */,
 				6B46FD271872175B00D51922 /* UIKit.framework */,
@@ -158,6 +187,39 @@
 				6B46FD511872175B00D51922 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B88E26318761D8400257D0C /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				6B88E26418761DA000257D0C /* KeyHelper.h */,
+				6B88E26518761DA000257D0C /* KeyHelper.m */,
+				6B88E26618761DA000257D0C /* RIOInterface.h */,
+				6B88E26718761DA000257D0C /* RIOInterface.mm */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
+		6B88E26A18761E5500257D0C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				6B88E26B18761E5A00257D0C /* CAUtil */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		6B88E26B18761E5A00257D0C /* CAUtil */ = {
+			isa = PBXGroup;
+			children = (
+				6B88E27118761F7100257D0C /* SafeSoundAppDelegate.h */,
+				6B88E27218761F7100257D0C /* SafeSoundAppDelegate.m */,
+				6B88E26C18761E6F00257D0C /* CADebugMacros.h */,
+				6B88E26D18761E6F00257D0C /* CAStreamBasicDescription.h */,
+				6B88E26E18761E6F00257D0C /* CAXException.cpp */,
+				6B88E26F18761E6F00257D0C /* CAXException.h */,
+				6B88E27A187620D600257D0C /* CADebugPrintf.h */,
+			);
+			name = CAUtil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +321,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B46FD341872175B00D51922 /* AppDelegate.m in Sources */,
+				6B88E26818761DA000257D0C /* KeyHelper.m in Sources */,
 				6B46FD3D1872175B00D51922 /* MainViewController.m in Sources */,
 				6B46FD401872175B00D51922 /* FlipsideViewController.m in Sources */,
+				6B88E26918761DA000257D0C /* RIOInterface.mm in Sources */,
+				6B88E27318761F7100257D0C /* SafeSoundAppDelegate.m in Sources */,
+				6B88E27018761E6F00257D0C /* CAXException.cpp in Sources */,
 				6B46FD301872175B00D51922 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +546,7 @@
 				6B46FD5A1872175B00D51922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6B46FD5B1872175B00D51922 /* Build configuration list for PBXNativeTarget "Pure Guitar TunerTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +555,7 @@
 				6B46FD5D1872175B00D51922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
