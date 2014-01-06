@@ -18,7 +18,7 @@
 #import <Accelerate/Accelerate.h>
 #include <stdlib.h>
 
-@class ListenerViewController;
+@class MainViewController;
 
 /**
  *	This is a singleton class that manages all the low level CoreAudio/RemoteIO
@@ -35,7 +35,7 @@
 
 @interface RIOInterface : NSObject {
 	UIViewController *selectedViewController;
-	ListenerViewController *listener;
+	MainViewController *listener;
 	
 	AUGraph processingGraph;
 	AudioUnit ioUnit;
@@ -57,7 +57,7 @@
 
 @property(nonatomic, assign) id<AVAudioPlayerDelegate> audioPlayerDelegate;
 @property(nonatomic, assign) id<AVAudioSessionDelegate> audioSessionDelegate;
-@property(nonatomic, assign) ListenerViewController *listener;
+@property(nonatomic, assign) MainViewController *listener;
 
 @property(assign) float sampleRate;
 @property(assign) float frequency;
@@ -76,7 +76,7 @@
 - (void)printASBD:(AudioStreamBasicDescription)asbd;
 
 #pragma mark Listener Controls
-- (void)startListening:(ListenerViewController*)aListener;
+- (void)startListening:(MainViewController *)aListener;
 - (void)stopListening;
 
 #pragma mark Generic Audio Controls

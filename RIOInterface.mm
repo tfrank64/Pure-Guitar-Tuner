@@ -9,7 +9,8 @@
 #import "RIOInterface.h"
 #import "CAStreamBasicDescription.h"
 #import "CAXException.h"
-#import "ListenerViewController.h"
+#import "MainViewController.h"
+// #import "ListenerViewController.h"
 
 @implementation RIOInterface
 
@@ -59,7 +60,7 @@ void ConvertInt16ToFloat(RIOInterface* THIS, void *buf, float *outputBuf, size_t
 
 #pragma mark -
 #pragma mark Listener Controls
-- (void)startListening:(ListenerViewController*)aListener {
+- (void)startListening:(MainViewController *)aListener {
 	self.listener = aListener;
 	[self createAUProcessingGraph];
 	[self initializeAndStartProcessingGraph];	
@@ -223,13 +224,14 @@ void ConvertInt16ToFloat(RIOInterface* THIS, void *buf, float *outputBuf, size_t
 	NSError	*err = nil;
 	AVAudioSession *session = [AVAudioSession sharedInstance];
 	
-	[session setPreferredHardwareSampleRate:sampleRate error:&err];
+	// [session setPreferredHardwareSampleRate:sampleRate error:&err]; // method is deprecated
+    [session setPreferredSampleRate:sampleRate error:&err];
 	[session setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
 	[session setActive:YES error:&err];
 	
 	// After activation, update our sample rate. We need to update because there
 	// is a possibility the system cannot grant our request. 
-	sampleRate = [session currentHardwareSampleRate];
+	sampleRate = session.sampleRate;
 
 	[self realFFTSetup];
 }

@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "FlipsideViewController.h"
+#import "KeyHelper.h"
+#import "RIOInterface.h"
 
 @interface MainViewController ()
 @end
@@ -18,6 +20,8 @@
 }
 
 @synthesize scrollView = m_scrollView;
+@synthesize currentPitchLabel = m_currentPitchLabel;
+@synthesize rioRef = m_rioRef;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -27,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    m_rioRef = [RIOInterface sharedInstance];
     
     m_scrollView = [[UIScrollView alloc] init];
     m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
@@ -71,14 +77,71 @@
     
     [m_toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:m_toggleButton];
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self startListener];
+    
     // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
-    NSLog(@"origin: %f", m_scrollView.contentOffset.x);
-    NSLog(@"origin: %f", m_scrollView.contentOffset.y);
     [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
+    
+    m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 400, 200, 44)];
+    m_currentPitchLabel.text = @"0.0";
+    m_currentPitchLabel.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:m_currentPitchLabel];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [m_rioRef stopListening];
+    m_currentPitchLabel = nil;
+    [super viewDidDisappear:animated];
+}
+
+- (void)startListener
+{
+    [m_rioRef startListening:self];
+}
+
+// This method gets called by the rendering function. Update the UI with
+// the character type and store it in our string.
+- (void)frequencyChangedWithValue:(float)newFrequency
+{
+	self.currentFrequency = newFrequency;
+	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
+	
+	/*
+	 * If you want to display letter values for pitches, uncomment this code and
+	 * add your frequency to pitch mappings in KeyHelper.m
+	 */
+	
+	
+	/*KeyHelper *helper = [KeyHelper sharedInstance];
+	NSString *closestChar = [helper closestCharForFrequency:newFrequency];
+	
+	// If the new sample has the same frequency as the last one, we should ignore
+	// it. This is a pretty inefficient way of doing comparisons, but it works.
+	if (![self.prevChar isEqualToString:closestChar])
+    {
+		self.prevChar = closestChar;
+		if ([closestChar isEqualToString:@"0"])
+        {
+            //	[self toggleListening:nil];
+		}
+		[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
+		NSString *appendedString = [self.key stringByAppendingString:closestChar];
+		self.key = [NSMutableString stringWithString:appendedString];
+        NSLog(@"Current Key: %@", self.key);
+	}*/
+}
+
+- (void)updateFrequencyLabel
+{
+	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f", self.currentFrequency];
+	[self.currentPitchLabel setNeedsDisplay];
 }
 
 #pragma mark - Flipside View Controller

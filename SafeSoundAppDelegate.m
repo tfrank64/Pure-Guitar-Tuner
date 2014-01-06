@@ -91,11 +91,11 @@
 }
 
 
-//- (void)dealloc {
-//	[viewController release];
-//    [window release];
-//    [super dealloc];
-//}
+- (void)dealloc {
+	[viewController release];
+    [window release];
+    [super dealloc];
+}
 
 
 @end

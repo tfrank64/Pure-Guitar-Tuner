@@ -15,18 +15,18 @@
 
 - (void)buildKeyMapping {
 	self.keyMapping = [[NSMutableDictionary alloc] initWithCapacity:9];
-	[keyMapping setObject:[NSNumber numberWithFloat:466.7] forKey:@"c"];
-	[keyMapping setObject:[NSNumber numberWithFloat:494.4] forKey:@"d"];
-	[keyMapping setObject:[NSNumber numberWithFloat:523.8] forKey:@"e"];
-	[keyMapping setObject:[NSNumber numberWithFloat:415.8] forKey:@"a"];
-	[keyMapping setObject:[NSNumber numberWithFloat:440.5] forKey:@"b"];
+	[keyMapping setObject:[NSNumber numberWithFloat:82.4] forKey:@"e2"];
+	[keyMapping setObject:[NSNumber numberWithFloat:110.0] forKey:@"a"];
+	[keyMapping setObject:[NSNumber numberWithFloat:146.8] forKey:@"d"];
+	[keyMapping setObject:[NSNumber numberWithFloat:196.0] forKey:@"g"];
+	[keyMapping setObject:[NSNumber numberWithFloat:246.9] forKey:@"b"];
 	
 	self.frequencyMapping = [[NSMutableDictionary alloc] initWithCapacity:9];
-	[frequencyMapping setObject:@"c" forKey:[NSNumber numberWithFloat:466.7]];
-	[frequencyMapping setObject:@"d" forKey:[NSNumber numberWithFloat:494.4]];
-	[frequencyMapping setObject:@"e" forKey:[NSNumber numberWithFloat:523.8]];
-	[frequencyMapping setObject:@"a" forKey:[NSNumber numberWithFloat:415.8]];
-	[frequencyMapping setObject:@"b" forKey:[NSNumber numberWithFloat:440.5]];
+	[frequencyMapping setObject:@"e2" forKey:[NSNumber numberWithFloat:82.4]];
+	[frequencyMapping setObject:@"a" forKey:[NSNumber numberWithFloat:110.0]];
+	[frequencyMapping setObject:@"d" forKey:[NSNumber numberWithFloat:146.8]];
+	[frequencyMapping setObject:@"g" forKey:[NSNumber numberWithFloat:196.0]];
+	[frequencyMapping setObject:@"b" forKey:[NSNumber numberWithFloat:246.9]];
 }
 
 // Gets the character closest to the frequency passed in. 
@@ -77,20 +77,20 @@ static KeyHelper *sharedInstance = nil;
     return self;
 }
 
-//- (id)retain {
-//    return self;
-//}
-//
-//- (unsigned)retainCount {
-//    return UINT_MAX;  // denotes an object that cannot be released
-//}
-//
-//- (oneway void)release {
-//    //do nothing
-//}
-//
-//- (id)autorelease {
-//    return self;
-//}
+- (id)retain {
+    return self;
+}
+
+- (unsigned)retainCount {
+    return UINT_MAX;  // denotes an object that cannot be released
+}
+
+- (oneway void)release {
+    //do nothing
+}
+
+- (id)autorelease {
+    return self;
+}
 
 @end
