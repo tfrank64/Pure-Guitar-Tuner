@@ -10,6 +10,7 @@
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
 #import "RIOInterface.h"
+#import "MacroHelpers.h"
 
 @interface MainViewController ()
 @end
@@ -37,8 +38,8 @@
     m_scrollView = [[UIScrollView alloc] init];
     m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
     m_scrollView.contentSize = CGSizeMake(m_scrollView.frame.size.width * 4, m_scrollView.frame.size.height);
-
-    m_scrollView.backgroundColor = [UIColor colorWithRed:36.0/255.0 green:42.0/255.0 blue:50.0/255.0 alpha:1];
+    
+    m_scrollView.backgroundColor = rgb(36, 42, 50);
     m_scrollView.showsVerticalScrollIndicator = NO;
     m_scrollView.showsHorizontalScrollIndicator = NO;
     m_scrollView.scrollEnabled = YES;
@@ -54,7 +55,7 @@
 
         tunerNumber.text = [NSString stringWithFormat:@"%d", decibal];
         NSLog(@"spacing: %f", m_scrollView.frame.size.width/3 * i);
-        views.backgroundColor=[UIColor colorWithRed:0 green:172.0/255.0 blue:221.0/255.0 alpha:1];
+        views.backgroundColor = rgb(0, 172, 221);
         tunerNumber.textColor = [UIColor whiteColor];
         [views setTag:i];
         [m_scrollView addSubview:views];
@@ -113,6 +114,8 @@
 	self.currentFrequency = newFrequency;
 	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 	
+    // Update tuner here based on if in selected note range, for testing we will do C which is between 236.6 and 286.6
+    
 	/*
 	 * If you want to display letter values for pitches, uncomment this code and
 	 * add your frequency to pitch mappings in KeyHelper.m

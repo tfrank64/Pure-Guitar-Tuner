@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B209AEB187E1C26008C6B20 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B209AEA187E1C26008C6B20 /* MobileCoreServices.framework */; };
 		6B46FD241872175B00D51922 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B46FD231872175B00D51922 /* Foundation.framework */; };
 		6B46FD261872175B00D51922 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B46FD251872175B00D51922 /* CoreGraphics.framework */; };
 		6B46FD281872175B00D51922 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B46FD271872175B00D51922 /* UIKit.framework */; };
@@ -27,6 +28,8 @@
 		6B60BAF0187A167F00AAEBBC /* SafeSoundAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAEF187A167F00AAEBBC /* SafeSoundAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF5187A169B00AAEBBC /* KeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAF2187A169B00AAEBBC /* KeyHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF6187A169B00AAEBBC /* RIOInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAF4187A169B00AAEBBC /* RIOInterface.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6B844AC4188DD8930083C8A0 /* UIAlertViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B844AC3188DD8930083C8A0 /* UIAlertViewHelper.m */; };
+		6B844AC7188DD8DD0083C8A0 /* NSStringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B844AC6188DD8DD0083C8A0 /* NSStringHelper.m */; };
 		6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2741876203400257D0C /* CoreAudio.framework */; };
 		6B88E2771876204C00257D0C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2761876204C00257D0C /* AVFoundation.framework */; };
 		6B88E2791876205A00257D0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2781876205A00257D0C /* AudioToolbox.framework */; };
@@ -43,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B209AE8187E1C11008C6B20 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		6B209AEA187E1C26008C6B20 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6B46FD201872175B00D51922 /* Pure Guitar Tuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pure Guitar Tuner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B46FD231872175B00D51922 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B46FD251872175B00D51922 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,6 +80,11 @@
 		6B60BAF2187A169B00AAEBBC /* KeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyHelper.m; sourceTree = "<group>"; };
 		6B60BAF3187A169B00AAEBBC /* RIOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIOInterface.h; sourceTree = "<group>"; };
 		6B60BAF4187A169B00AAEBBC /* RIOInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RIOInterface.mm; sourceTree = "<group>"; };
+		6B844AC2188DD8930083C8A0 /* UIAlertViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewHelper.h; sourceTree = "<group>"; };
+		6B844AC3188DD8930083C8A0 /* UIAlertViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewHelper.m; sourceTree = "<group>"; };
+		6B844AC5188DD8DD0083C8A0 /* NSStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringHelper.h; sourceTree = "<group>"; };
+		6B844AC6188DD8DD0083C8A0 /* NSStringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringHelper.m; sourceTree = "<group>"; };
+		6B844AC9188DD9E90083C8A0 /* MacroHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroHelpers.h; sourceTree = "<group>"; };
 		6B88E2741876203400257D0C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		6B88E2761876204C00257D0C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B88E2781876205A00257D0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -86,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B209AEB187E1C26008C6B20 /* MobileCoreServices.framework in Frameworks */,
 				6B88E2791876205A00257D0C /* AudioToolbox.framework in Frameworks */,
 				6B88E2771876204C00257D0C /* AVFoundation.framework in Frameworks */,
 				6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */,
@@ -108,6 +119,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B209AE7187E1BE1008C6B20 /* External Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "External Frameworks";
+			sourceTree = "<group>";
+		};
 		6B46FD171872175B00D51922 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +150,9 @@
 		6B46FD221872175B00D51922 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B209AEA187E1C26008C6B20 /* MobileCoreServices.framework */,
+				6B209AE8187E1C11008C6B20 /* AudioUnit.framework */,
+				6B209AE7187E1BE1008C6B20 /* External Frameworks */,
 				6B88E2781876205A00257D0C /* AudioToolbox.framework */,
 				6B88E2761876204C00257D0C /* AVFoundation.framework */,
 				6B88E2741876203400257D0C /* CoreAudio.framework */,
@@ -146,6 +167,8 @@
 		6B46FD291872175B00D51922 /* Pure Guitar Tuner */ = {
 			isa = PBXGroup;
 			children = (
+				6B844AC8188DD9C90083C8A0 /* Utilities */,
+				6B844AC1188DD8510083C8A0 /* NSHelpers */,
 				6B46FD321872175B00D51922 /* AppDelegate.h */,
 				6B46FD331872175B00D51922 /* AppDelegate.m */,
 				6B46FD351872175B00D51922 /* Main_iPhone.storyboard */,
@@ -187,6 +210,25 @@
 				6B46FD511872175B00D51922 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B844AC1188DD8510083C8A0 /* NSHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				6B844AC5188DD8DD0083C8A0 /* NSStringHelper.h */,
+				6B844AC6188DD8DD0083C8A0 /* NSStringHelper.m */,
+				6B844AC2188DD8930083C8A0 /* UIAlertViewHelper.h */,
+				6B844AC3188DD8930083C8A0 /* UIAlertViewHelper.m */,
+			);
+			name = NSHelpers;
+			sourceTree = "<group>";
+		};
+		6B844AC8188DD9C90083C8A0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6B844AC9188DD9E90083C8A0 /* MacroHelpers.h */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		6B88E26318761D8400257D0C /* Singletons */ = {
@@ -328,6 +370,8 @@
 				6B60BAF0187A167F00AAEBBC /* SafeSoundAppDelegate.m in Sources */,
 				6B60BAED187A167000AAEBBC /* CAXException.cpp in Sources */,
 				6B46FD301872175B00D51922 /* main.m in Sources */,
+				6B844AC4188DD8930083C8A0 /* UIAlertViewHelper.m in Sources */,
+				6B844AC7188DD8DD0083C8A0 /* NSStringHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,9 +508,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/PortAudio,
+					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pure Guitar Tuner/Pure Guitar Tuner-Prefix.pch";
 				INFOPLIST_FILE = "Pure Guitar Tuner/Pure Guitar Tuner-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -477,9 +530,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/PortAudio,
+					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pure Guitar Tuner/Pure Guitar Tuner-Prefix.pch";
 				INFOPLIST_FILE = "Pure Guitar Tuner/Pure Guitar Tuner-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
