@@ -7,8 +7,7 @@
 //
 
 #import "FlipsideViewController.h"
-
-@class RIOInterface;
+#import "PitchDetector.h"
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate, UIPopoverControllerDelegate>
 
@@ -18,11 +17,15 @@
 @property(nonatomic, retain) UILabel *currentPitchLabel;
 @property(nonatomic, retain) NSMutableString *key;
 @property(nonatomic, retain) NSString *prevChar;
-@property(nonatomic, assign) RIOInterface *rioRef;
 @property(nonatomic, assign) float currentFrequency;
 @property(assign) BOOL isListening;
 
+@property (nonatomic, strong) PitchDetector *pitchDetector;
+
 - (void)frequencyChangedWithValue:(float)newFrequency;
 - (void)updateFrequencyLabel;
+
+-(int)midiToPosition:(int)midi;
+-(void)moveIndicatorByMIDI:(int)midi;
 
 @end

@@ -28,6 +28,13 @@
 		6B60BAF0187A167F00AAEBBC /* SafeSoundAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAEF187A167F00AAEBBC /* SafeSoundAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF5187A169B00AAEBBC /* KeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAF2187A169B00AAEBBC /* KeyHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF6187A169B00AAEBBC /* RIOInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAF4187A169B00AAEBBC /* RIOInterface.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6B7D2793190F4CF5007B6FF4 /* PitchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D2792190F4CF5007B6FF4 /* PitchDetector.m */; };
+		6B7D27A0190F4DEB007B6FF4 /* test_1_4096_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D2795190F4DEB007B6FF4 /* test_1_4096_0.m */; };
+		6B7D27A1190F4DEB007B6FF4 /* test_1_4096_50.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D2797190F4DEB007B6FF4 /* test_1_4096_50.m */; };
+		6B7D27A2190F4DEB007B6FF4 /* test_1_8192_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D2799190F4DEB007B6FF4 /* test_1_8192_0.m */; };
+		6B7D27A3190F4DEB007B6FF4 /* test_1_8192_50.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D279B190F4DEB007B6FF4 /* test_1_8192_50.m */; };
+		6B7D27A4190F4DEB007B6FF4 /* test_1_16384_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D279D190F4DEB007B6FF4 /* test_1_16384_0.m */; };
+		6B7D27A5190F4DEB007B6FF4 /* test_1_16384_50.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D279F190F4DEB007B6FF4 /* test_1_16384_50.m */; };
 		6B844AC4188DD8930083C8A0 /* UIAlertViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B844AC3188DD8930083C8A0 /* UIAlertViewHelper.m */; };
 		6B844AC7188DD8DD0083C8A0 /* NSStringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B844AC6188DD8DD0083C8A0 /* NSStringHelper.m */; };
 		6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2741876203400257D0C /* CoreAudio.framework */; };
@@ -80,6 +87,20 @@
 		6B60BAF2187A169B00AAEBBC /* KeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyHelper.m; sourceTree = "<group>"; };
 		6B60BAF3187A169B00AAEBBC /* RIOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIOInterface.h; sourceTree = "<group>"; };
 		6B60BAF4187A169B00AAEBBC /* RIOInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RIOInterface.mm; sourceTree = "<group>"; };
+		6B7D2791190F4CF5007B6FF4 /* PitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchDetector.h; sourceTree = "<group>"; };
+		6B7D2792190F4CF5007B6FF4 /* PitchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchDetector.m; sourceTree = "<group>"; };
+		6B7D2794190F4DEB007B6FF4 /* test_1_4096_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_4096_0.h; sourceTree = "<group>"; };
+		6B7D2795190F4DEB007B6FF4 /* test_1_4096_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_4096_0.m; sourceTree = "<group>"; };
+		6B7D2796190F4DEB007B6FF4 /* test_1_4096_50.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_4096_50.h; sourceTree = "<group>"; };
+		6B7D2797190F4DEB007B6FF4 /* test_1_4096_50.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_4096_50.m; sourceTree = "<group>"; };
+		6B7D2798190F4DEB007B6FF4 /* test_1_8192_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_8192_0.h; sourceTree = "<group>"; };
+		6B7D2799190F4DEB007B6FF4 /* test_1_8192_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_8192_0.m; sourceTree = "<group>"; };
+		6B7D279A190F4DEB007B6FF4 /* test_1_8192_50.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_8192_50.h; sourceTree = "<group>"; };
+		6B7D279B190F4DEB007B6FF4 /* test_1_8192_50.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_8192_50.m; sourceTree = "<group>"; };
+		6B7D279C190F4DEB007B6FF4 /* test_1_16384_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_16384_0.h; sourceTree = "<group>"; };
+		6B7D279D190F4DEB007B6FF4 /* test_1_16384_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_16384_0.m; sourceTree = "<group>"; };
+		6B7D279E190F4DEB007B6FF4 /* test_1_16384_50.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_1_16384_50.h; sourceTree = "<group>"; };
+		6B7D279F190F4DEB007B6FF4 /* test_1_16384_50.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_1_16384_50.m; sourceTree = "<group>"; };
 		6B844AC2188DD8930083C8A0 /* UIAlertViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewHelper.h; sourceTree = "<group>"; };
 		6B844AC3188DD8930083C8A0 /* UIAlertViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewHelper.m; sourceTree = "<group>"; };
 		6B844AC5188DD8DD0083C8A0 /* NSStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringHelper.h; sourceTree = "<group>"; };
@@ -119,13 +140,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B209AE7187E1BE1008C6B20 /* External Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "External Frameworks";
-			sourceTree = "<group>";
-		};
 		6B46FD171872175B00D51922 = {
 			isa = PBXGroup;
 			children = (
@@ -152,7 +166,6 @@
 			children = (
 				6B209AEA187E1C26008C6B20 /* MobileCoreServices.framework */,
 				6B209AE8187E1C11008C6B20 /* AudioUnit.framework */,
-				6B209AE7187E1BE1008C6B20 /* External Frameworks */,
 				6B88E2781876205A00257D0C /* AudioToolbox.framework */,
 				6B88E2761876204C00257D0C /* AVFoundation.framework */,
 				6B88E2741876203400257D0C /* CoreAudio.framework */,
@@ -212,6 +225,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6B7D2790190F4CF5007B6FF4 /* PitchDetector */ = {
+			isa = PBXGroup;
+			children = (
+				6B7D2791190F4CF5007B6FF4 /* PitchDetector.h */,
+				6B7D2792190F4CF5007B6FF4 /* PitchDetector.m */,
+				6B7D2794190F4DEB007B6FF4 /* test_1_4096_0.h */,
+				6B7D2795190F4DEB007B6FF4 /* test_1_4096_0.m */,
+				6B7D2796190F4DEB007B6FF4 /* test_1_4096_50.h */,
+				6B7D2797190F4DEB007B6FF4 /* test_1_4096_50.m */,
+				6B7D2798190F4DEB007B6FF4 /* test_1_8192_0.h */,
+				6B7D2799190F4DEB007B6FF4 /* test_1_8192_0.m */,
+				6B7D279A190F4DEB007B6FF4 /* test_1_8192_50.h */,
+				6B7D279B190F4DEB007B6FF4 /* test_1_8192_50.m */,
+				6B7D279C190F4DEB007B6FF4 /* test_1_16384_0.h */,
+				6B7D279D190F4DEB007B6FF4 /* test_1_16384_0.m */,
+				6B7D279E190F4DEB007B6FF4 /* test_1_16384_50.h */,
+				6B7D279F190F4DEB007B6FF4 /* test_1_16384_50.m */,
+			);
+			name = PitchDetector;
+			path = "Pure Guitar Tuner/PitchDetector";
+			sourceTree = "<group>";
+		};
 		6B844AC1188DD8510083C8A0 /* NSHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +280,7 @@
 		6B88E26A18761E5500257D0C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				6B7D2790190F4CF5007B6FF4 /* PitchDetector */,
 				6B88E26B18761E5A00257D0C /* CAUtil */,
 			);
 			name = Other;
@@ -362,16 +398,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7D27A3190F4DEB007B6FF4 /* test_1_8192_50.m in Sources */,
 				6B46FD341872175B00D51922 /* AppDelegate.m in Sources */,
 				6B60BAF5187A169B00AAEBBC /* KeyHelper.m in Sources */,
+				6B7D27A2190F4DEB007B6FF4 /* test_1_8192_0.m in Sources */,
 				6B60BAF6187A169B00AAEBBC /* RIOInterface.mm in Sources */,
 				6B46FD3D1872175B00D51922 /* MainViewController.m in Sources */,
+				6B7D27A1190F4DEB007B6FF4 /* test_1_4096_50.m in Sources */,
+				6B7D27A5190F4DEB007B6FF4 /* test_1_16384_50.m in Sources */,
 				6B46FD401872175B00D51922 /* FlipsideViewController.m in Sources */,
+				6B7D2793190F4CF5007B6FF4 /* PitchDetector.m in Sources */,
 				6B60BAF0187A167F00AAEBBC /* SafeSoundAppDelegate.m in Sources */,
+				6B7D27A0190F4DEB007B6FF4 /* test_1_4096_0.m in Sources */,
 				6B60BAED187A167000AAEBBC /* CAXException.cpp in Sources */,
 				6B46FD301872175B00D51922 /* main.m in Sources */,
 				6B844AC4188DD8930083C8A0 /* UIAlertViewHelper.m in Sources */,
 				6B844AC7188DD8DD0083C8A0 /* NSStringHelper.m in Sources */,
+				6B7D27A4190F4DEB007B6FF4 /* test_1_16384_0.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

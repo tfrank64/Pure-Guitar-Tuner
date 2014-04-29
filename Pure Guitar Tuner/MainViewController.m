@@ -9,8 +9,34 @@
 #import "MainViewController.h"
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
-#import "RIOInterface.h"
+// #import "RIOInterface.h"
 #import "MacroHelpers.h"
+
+#define C5_y        294.5
+#define B4_y        282.5
+#define ASharp4_y   270.5
+#define A4_y        258.5
+#define GSharp4_y   246.5
+#define G4_y        234.5
+#define FSharp4_y   222.5
+#define F4_y        210.5
+#define E4_y        198.5
+#define DSharp4_y   186.5
+#define D4_y        174.5
+#define CSharp4_y   162.5
+#define C4_y        150.5
+#define B3_y        138.5
+#define ASharp3_y   126.5
+#define A3_y        114.5
+#define GSharp3_y   102.5
+#define G3_y        90.5
+#define FSharp3_y   78.5
+#define F3_y        67.5
+#define E3_y        54.5
+#define DSharp3_y   42.5
+#define D3_y        30.5
+#define CSharp3_y   18.5
+#define C3_y        6
 
 @interface MainViewController ()
 @end
@@ -22,7 +48,6 @@
 
 @synthesize scrollView = m_scrollView;
 @synthesize currentPitchLabel = m_currentPitchLabel;
-@synthesize rioRef = m_rioRef;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -33,7 +58,14 @@
 {
     [super viewDidLoad];
     
-    m_rioRef = [RIOInterface sharedInstance];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setInteger:4096 forKey:@"kBufferSize"];
+    [userDefaults setInteger:0 forKey:@"percentageOfOverlap"];
+    [userDefaults synchronize];
+    
+    _pitchDetector = [PitchDetector sharedDetector];
+    [_pitchDetector TurnOnMicrophoneTuner:self];
     
     m_scrollView = [[UIScrollView alloc] init];
     m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
@@ -54,7 +86,7 @@
         UILabel *tunerNumber = [[UILabel alloc] initWithFrame:CGRectMake((m_scrollView.frame.size.width/3 * i)+5, 0, 100, 20)];
 
         tunerNumber.text = [NSString stringWithFormat:@"%d", decibal];
-        NSLog(@"spacing: %f", m_scrollView.frame.size.width/3 * i);
+        //NSLog(@"spacing: %f", m_scrollView.frame.size.width/3 * i);
         views.backgroundColor = rgb(0, 172, 221);
         tunerNumber.textColor = [UIColor whiteColor];
         [views setTag:i];
@@ -83,9 +115,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{
-    [self startListener];
-    
+{    
     // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
     [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
     
@@ -97,14 +127,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [m_rioRef stopListening];
     m_currentPitchLabel = nil;
     [super viewDidDisappear:animated];
-}
-
-- (void)startListener
-{
-    [m_rioRef startListening:self];
 }
 
 // This method gets called by the rendering function. Update the UI with
@@ -113,32 +137,6 @@
 {
 	self.currentFrequency = newFrequency;
 	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
-	
-    // Update tuner here based on if in selected note range, for testing we will do C which is between 236.6 and 286.6
-    
-	/*
-	 * If you want to display letter values for pitches, uncomment this code and
-	 * add your frequency to pitch mappings in KeyHelper.m
-	 */
-	
-	
-	/*KeyHelper *helper = [KeyHelper sharedInstance];
-	NSString *closestChar = [helper closestCharForFrequency:newFrequency];
-	
-	// If the new sample has the same frequency as the last one, we should ignore
-	// it. This is a pretty inefficient way of doing comparisons, but it works.
-	if (![self.prevChar isEqualToString:closestChar])
-    {
-		self.prevChar = closestChar;
-		if ([closestChar isEqualToString:@"0"])
-        {
-            //	[self toggleListening:nil];
-		}
-		[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
-		NSString *appendedString = [self.key stringByAppendingString:closestChar];
-		self.key = [NSMutableString stringWithString:appendedString];
-        NSLog(@"Current Key: %@", self.key);
-	}*/
 }
 
 - (void)updateFrequencyLabel
@@ -186,6 +184,58 @@
             [self presentViewController:flipSideViewController animated:YES completion:nil];
         }
     }
+}
+
+- (int)midiToPosition:(int)midi
+{
+    switch (midi)
+    {
+        case 72:        return C5_y;
+        case 71:        return B4_y;
+        case 70:        return ASharp4_y;
+        case 69:        return A4_y;
+        case 68:        return GSharp4_y;
+        case 67:        return G4_y;
+        case 66:        return FSharp4_y;
+        case 65:        return F4_y;
+        case 64:        return E4_y;
+        case 63:        return DSharp4_y;
+        case 62:        return D4_y;
+        case 61:        return CSharp4_y;
+        case 60:        return C4_y;
+        case 59:        return B3_y;
+        case 58:        return ASharp3_y;
+        case 57:        return A3_y;
+        case 56:        return GSharp3_y;
+        case 55:        return G3_y;
+        case 54:        return FSharp3_y;
+        case 53:        return F3_y;
+        case 52:        return E3_y;
+        case 51:        return DSharp3_y;
+        case 50:        return D3_y;
+        case 49:        return CSharp3_y;
+        case 48:        return C3_y;
+        default:
+            if (midi<48)
+                return -34;
+            else
+                return 330;
+    }
+}
+
+- (void)moveIndicatorByMIDI:(int)midi
+{
+//    if (indicator.hidden)
+//        return;
+    NSLog(@"midi: %d", midi);
+//    SKAction *easeMove = [SKAction moveToY:[self midiToPosition:midi] duration:0.2f];
+//    easeMove.timingMode = SKActionTimingEaseInEaseOut;
+//    [indicator runAction:easeMove];
+}
+
+- (void)dealloc
+{
+    [self.pitchDetector TurnOffMicrophone];
 }
 
 @end
