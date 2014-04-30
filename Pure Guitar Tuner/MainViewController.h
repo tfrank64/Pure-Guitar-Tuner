@@ -14,15 +14,15 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 
-@property(nonatomic, retain) UILabel *currentPitchLabel;
-@property(nonatomic, retain) NSMutableString *key;
-@property(nonatomic, retain) NSString *prevChar;
-@property(nonatomic, assign) float currentFrequency;
+@property (nonatomic, retain) UILabel *currentPitchLabel;
+@property( nonatomic, retain) NSMutableString *key;
+@property (nonatomic, retain) NSString *prevChar;
+@property (nonatomic, assign) int currentFrequency;
+@property (nonatomic, strong) NSString *currentNote;
 @property(assign) BOOL isListening;
 
 @property (nonatomic, strong) PitchDetector *pitchDetector;
 
-- (void)frequencyChangedWithValue:(float)newFrequency;
 - (void)updateFrequencyLabel;
 
 -(int)midiToPosition:(int)midi;

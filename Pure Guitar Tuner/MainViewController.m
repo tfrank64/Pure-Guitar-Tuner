@@ -9,9 +9,11 @@
 #import "MainViewController.h"
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
-// #import "RIOInterface.h"
 #import "MacroHelpers.h"
 
+#define DSharp      330.5
+#define D5          318.5
+#define CSharp5     306.5
 #define C5_y        294.5
 #define B4_y        282.5
 #define ASharp4_y   270.5
@@ -43,6 +45,7 @@
 
 @implementation MainViewController
 {
+    int count;
     UIButton *m_toggleButton;
 }
 
@@ -58,6 +61,7 @@
 {
     [super viewDidLoad];
     
+    count = 0;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     [userDefaults setInteger:4096 forKey:@"kBufferSize"];
@@ -110,14 +114,12 @@
     
     [m_toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:m_toggleButton];
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {    
     // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
-    [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
+    // [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
     
     m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 400, 200, 44)];
     m_currentPitchLabel.text = @"0.0";
@@ -133,16 +135,19 @@
 
 // This method gets called by the rendering function. Update the UI with
 // the character type and store it in our string.
-- (void)frequencyChangedWithValue:(float)newFrequency
-{
-	self.currentFrequency = newFrequency;
-	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
-}
 
 - (void)updateFrequencyLabel
 {
-	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f", self.currentFrequency];
+    count++;
+    if (count >= 3) // Keeps tuner view from going crazy
+    {
+        [m_scrollView setContentOffset:CGPointMake(self.currentFrequency, 0) animated:YES];
+        count = 0;
+    }
+	self.currentPitchLabel.text = [NSString stringWithFormat:@"%d", self.currentFrequency];
 	[self.currentPitchLabel setNeedsDisplay];
+    
+    
 }
 
 #pragma mark - Flipside View Controller
@@ -227,7 +232,10 @@
 {
 //    if (indicator.hidden)
 //        return;
-    NSLog(@"midi: %d", midi);
+    int newFrequency = [self midiToPosition:midi];
+    NSLog(@"midi: %d and frequency: %d", midi, newFrequency);
+    self.currentFrequency = newFrequency;
+	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 //    SKAction *easeMove = [SKAction moveToY:[self midiToPosition:midi] duration:0.2f];
 //    easeMove.timingMode = SKActionTimingEaseInEaseOut;
 //    [indicator runAction:easeMove];

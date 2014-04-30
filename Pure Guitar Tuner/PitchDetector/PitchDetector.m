@@ -325,6 +325,7 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
     test_1_8192_50 *test_1_8192_50UI = THIS->test_1_8192_50UI;
     test_1_16384_0 *test_1_16384_0UI = THIS->test_1_16384_0UI;
     test_1_16384_50 *test_1_16384_50UI = THIS->test_1_16384_50UI;
+    MainViewController *mainViewPitch = THIS->mainViewPitch;
     
     FFTSetup fftSetup = THIS->fftSetup;
     COMPLEX_SPLIT FFT = THIS->FFT;
@@ -462,6 +463,7 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
         if(test_1_8192_50UI != nil)                     [test_1_8192_50UI moveIndicatorByMIDI:midiNum];
         if(test_1_16384_0UI != nil)                     [test_1_16384_0UI moveIndicatorByMIDI:midiNum];
         if(test_1_16384_50UI != nil)                    [test_1_16384_50UI moveIndicatorByMIDI:midiNum];
+        if(mainViewPitch != nil)                        [mainViewPitch moveIndicatorByMIDI:midiNum];
         
 //        if(test_2_Fly_Me_To_The_MoonUI != nil)          [test_2_Fly_Me_To_The_MoonUI moveIndicatorByMIDI:midiNum];
 //        if(test_4_My_Heart_Will_Go_OnUI != nil)         [test_4_My_Heart_Will_Go_OnUI moveIndicatorByMIDI:midiNum];
