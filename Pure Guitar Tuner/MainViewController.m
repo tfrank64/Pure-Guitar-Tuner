@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "EFCircularSlider.h"
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
 #import "MacroHelpers.h"
@@ -60,6 +61,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = rgb(36, 42, 50);
     
     count = 0;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -68,10 +70,29 @@
     [userDefaults setInteger:0 forKey:@"percentageOfOverlap"];
     [userDefaults synchronize];
     
+    CGRect currentFrame = self.view.frame;
+    self.knobPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(currentFrame.size.width/4, currentFrame.size.width/4, currentFrame.size.width/2, currentFrame.size.width/2)];
+    //self.knobPlaceholder.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.knobPlaceholder];
+    self.knobControl = [[RWKnobControl alloc] initWithFrame:self.knobPlaceholder.bounds];
+    [self.knobPlaceholder addSubview:_knobControl];
+    
+    self.knobControl.lineWidth = 8.0;
+    self.knobControl.pointerLength = 8.0;
+    self.knobControl.tintColor = [UIColor colorWithRed:0.237 green:0.504 blue:1.000 alpha:1.000];
+    
+//    CGRect currentFrame = self.view.frame;
+//    EFCircularSlider *circularSlider = [[EFCircularSlider alloc] initWithFrame:CGRectMake(currentFrame.size.width/4, currentFrame.size.width/4, currentFrame.size.width/2, currentFrame.size.width/2)];
+//    circularSlider.unfilledColor = [UIColor colorWithRed:0.197 green:0.384 blue:1.000 alpha:1.000];
+//    circularSlider.filledColor = [UIColor colorWithRed:0.306 green:0.138 blue:0.500 alpha:1.000];
+//    circularSlider.lineWidth = 15;
+//    circularSlider.handleType = EFSemiTransparentBlackCircle;
+//    [self.view addSubview:circularSlider];
+    
     _pitchDetector = [PitchDetector sharedDetector];
     [_pitchDetector TurnOnMicrophoneTuner:self];
     
-    m_scrollView = [[UIScrollView alloc] init];
+    /*m_scrollView = [[UIScrollView alloc] init];
     m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
     m_scrollView.contentSize = CGSizeMake(m_scrollView.frame.size.width * 4, m_scrollView.frame.size.height);
     
@@ -79,7 +100,7 @@
     m_scrollView.showsVerticalScrollIndicator = NO;
     m_scrollView.showsHorizontalScrollIndicator = NO;
     m_scrollView.scrollEnabled = YES;
-    // m_scrollView.userInteractionEnabled = NO;
+     m_scrollView.userInteractionEnabled = NO;
     
     // Generate content for our scroll view using the frame height and width as the reference point
     int i = 1;
@@ -104,7 +125,7 @@
     lineView.backgroundColor = [UIColor yellowColor];
     
     [self.view addSubview:m_scrollView];
-    [self.view insertSubview:lineView aboveSubview:m_scrollView];
+    [self.view insertSubview:lineView aboveSubview:m_scrollView];*/
     
     m_toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     CGRect buttonRect = m_toggleButton.frame;
@@ -139,12 +160,16 @@
 - (void)updateFrequencyLabel
 {
     count++;
-    if (count >= 3) // Keeps tuner view from going crazy
+    if (count >= 20 && self.currentFrequency <= 500.0) // Keeps tuner view from going crazy
     {
-        [m_scrollView setContentOffset:CGPointMake(self.currentFrequency, 0) animated:YES];
+        // update current note if in range
+        // update ui of freqency within range
+        CGFloat randomValue = (arc4random() % 101) / 100.f;
+        [self.knobControl setValue:randomValue animated:YES];
+        //[m_scrollView setContentOffset:CGPointMake(self.currentFrequency, 0) animated:YES];
         count = 0;
     }
-	self.currentPitchLabel.text = [NSString stringWithFormat:@"%d", self.currentFrequency];
+	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f", self.currentFrequency];
 	[self.currentPitchLabel setNeedsDisplay];
     
     
@@ -234,11 +259,18 @@
 //        return;
     int newFrequency = [self midiToPosition:midi];
     NSLog(@"midi: %d and frequency: %d", midi, newFrequency);
-    self.currentFrequency = newFrequency;
+    //self.currentFrequency = newFrequency;
 	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 //    SKAction *easeMove = [SKAction moveToY:[self midiToPosition:midi] duration:0.2f];
 //    easeMove.timingMode = SKActionTimingEaseInEaseOut;
 //    [indicator runAction:easeMove];
+}
+
+- (void)updateToFrequncy:(double)freqency
+{
+    //NSLog(@"CurrentFrequency: %f", freqency);
+    self.currentFrequency = freqency;
+    [self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 }
 
 - (void)dealloc
