@@ -19,8 +19,6 @@
 
 
 @property (nonatomic, retain) UILabel *currentPitchLabel;
-@property( nonatomic, retain) NSMutableString *key;
-@property (nonatomic, retain) NSString *prevChar;
 @property (nonatomic, assign) double currentFrequency;
 @property (nonatomic, strong) NSString *currentNote;
 @property(assign) BOOL isListening;
@@ -28,9 +26,6 @@
 @property (nonatomic, strong) PitchDetector *pitchDetector;
 
 - (void)updateFrequencyLabel;
-
--(int)midiToPosition:(int)midi;
--(void)moveIndicatorByMIDI:(int)midi;
 
 - (void)updateToFrequncy:(double)freqency;
 

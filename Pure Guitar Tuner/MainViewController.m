@@ -12,34 +12,43 @@
 #import "KeyHelper.h"
 #import "MacroHelpers.h"
 
-#define DSharp      330.5
-#define D5          318.5
-#define CSharp5     306.5
-#define C5_y        294.5
-#define B4_y        282.5
-#define ASharp4_y   270.5
-#define A4_y        258.5
-#define GSharp4_y   246.5
-#define G4_y        234.5
-#define FSharp4_y   222.5
-#define F4_y        210.5
-#define E4_y        198.5
-#define DSharp4_y   186.5
-#define D4_y        174.5
-#define CSharp4_y   162.5
-#define C4_y        150.5
-#define B3_y        138.5
-#define ASharp3_y   126.5
-#define A3_y        114.5
-#define GSharp3_y   102.5
-#define G3_y        90.5
-#define FSharp3_y   78.5
-#define F3_y        67.5
-#define E3_y        54.5
-#define DSharp3_y   42.5
-#define D3_y        30.5
-#define CSharp3_y   18.5
-#define C3_y        6
+//#define DSharp  330.5
+//#define D5      318.5
+//#define CSharp5 306.5
+//#define C5      294.5
+//#define B4      282.5
+//#define ASharp4 270.5
+//#define A4      258.5
+//#define GSharp4 246.5
+//#define G4      234.5
+#define FSharp4 370.0
+#define F4      349.2
+#define E4      329.6
+#define DSharp4 311.1
+#define D4      293.7
+#define CSharp4 277.2
+#define C4      261.6
+#define B3      246.9
+#define ASharp3 233.1
+#define A3      220.0
+#define GSharp3 207.7
+#define G3      196.0
+#define FSharp3 185.0
+#define F3      174.6
+#define E3      164.8
+#define DSharp3 155.6
+#define D3      146.8
+#define CSharp3 138.6
+#define C3      130.8
+#define B2      123.5
+#define ASharp2 116.5
+#define A2      110.0
+#define GSharp2 103.8
+#define G2      98.0
+#define FSharp2 92.50
+#define F2      87.31
+#define E2      82.41
+
 
 @interface MainViewController ()
 @end
@@ -50,7 +59,6 @@
     UIButton *m_toggleButton;
 }
 
-@synthesize scrollView = m_scrollView;
 @synthesize currentPitchLabel = m_currentPitchLabel;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -71,7 +79,7 @@
     [userDefaults synchronize];
     
     CGRect currentFrame = self.view.frame;
-    self.knobPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(currentFrame.size.width/4, currentFrame.size.width/4, currentFrame.size.width/2, currentFrame.size.width/2)];
+    self.knobPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(currentFrame.size.width/6, currentFrame.size.width/5, currentFrame.size.width/1.5, currentFrame.size.width/1.5)];
     //self.knobPlaceholder.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.knobPlaceholder];
     self.knobControl = [[RWKnobControl alloc] initWithFrame:self.knobPlaceholder.bounds];
@@ -81,13 +89,23 @@
     self.knobControl.pointerLength = 8.0;
     self.knobControl.tintColor = [UIColor colorWithRed:0.237 green:0.504 blue:1.000 alpha:1.000];
     
-//    CGRect currentFrame = self.view.frame;
-//    EFCircularSlider *circularSlider = [[EFCircularSlider alloc] initWithFrame:CGRectMake(currentFrame.size.width/4, currentFrame.size.width/4, currentFrame.size.width/2, currentFrame.size.width/2)];
-//    circularSlider.unfilledColor = [UIColor colorWithRed:0.197 green:0.384 blue:1.000 alpha:1.000];
-//    circularSlider.filledColor = [UIColor colorWithRed:0.306 green:0.138 blue:0.500 alpha:1.000];
-//    circularSlider.lineWidth = 15;
-//    circularSlider.handleType = EFSemiTransparentBlackCircle;
-//    [self.view addSubview:circularSlider];
+    
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, currentFrame.size.height/1.33, currentFrame.size.width, currentFrame.size.height/4)];
+    _scrollView.contentSize = CGSizeMake(currentFrame.size.width * 4, currentFrame.size.height/4);
+    _scrollView.backgroundColor = [UIColor lightGrayColor];
+    _scrollView.pagingEnabled = YES;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:_scrollView];
+    
+    int i = 0;
+    while (i <= 3)
+    {
+        UIView *views = [[UIView alloc] initWithFrame:CGRectMake(((_scrollView.frame.size.width)*i)+20, 10, (_scrollView.frame.size.width)-40, _scrollView.frame.size.height-20)];
+        views.backgroundColor=[UIColor yellowColor];
+        [views setTag:i];
+        [_scrollView addSubview:views];
+        i++;
+    }
     
     _pitchDetector = [PitchDetector sharedDetector];
     [_pitchDetector TurnOnMicrophoneTuner:self];
@@ -142,7 +160,7 @@
     // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
     // [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
     
-    m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 400, 200, 44)];
+    m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
     m_currentPitchLabel.text = @"0.0";
     m_currentPitchLabel.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:m_currentPitchLabel];
@@ -154,14 +172,12 @@
     [super viewDidDisappear:animated];
 }
 
-// This method gets called by the rendering function. Update the UI with
-// the character type and store it in our string.
-
 - (void)updateFrequencyLabel
 {
     count++;
     if (count >= 20 && self.currentFrequency <= 500.0) // Keeps tuner view from going crazy
     {
+        //int page = _scrollView.contentOffset.x / _scrollView.frame.size.width;
         // update current note if in range
         // update ui of freqency within range
         CGFloat randomValue = (arc4random() % 101) / 100.f;
@@ -216,54 +232,10 @@
     }
 }
 
-- (int)midiToPosition:(int)midi
+- (int)calculateCurrentNote:(double)freqency
 {
-    switch (midi)
-    {
-        case 72:        return C5_y;
-        case 71:        return B4_y;
-        case 70:        return ASharp4_y;
-        case 69:        return A4_y;
-        case 68:        return GSharp4_y;
-        case 67:        return G4_y;
-        case 66:        return FSharp4_y;
-        case 65:        return F4_y;
-        case 64:        return E4_y;
-        case 63:        return DSharp4_y;
-        case 62:        return D4_y;
-        case 61:        return CSharp4_y;
-        case 60:        return C4_y;
-        case 59:        return B3_y;
-        case 58:        return ASharp3_y;
-        case 57:        return A3_y;
-        case 56:        return GSharp3_y;
-        case 55:        return G3_y;
-        case 54:        return FSharp3_y;
-        case 53:        return F3_y;
-        case 52:        return E3_y;
-        case 51:        return DSharp3_y;
-        case 50:        return D3_y;
-        case 49:        return CSharp3_y;
-        case 48:        return C3_y;
-        default:
-            if (midi<48)
-                return -34;
-            else
-                return 330;
-    }
-}
-
-- (void)moveIndicatorByMIDI:(int)midi
-{
-//    if (indicator.hidden)
-//        return;
-    int newFrequency = [self midiToPosition:midi];
-    NSLog(@"midi: %d and frequency: %d", midi, newFrequency);
-    //self.currentFrequency = newFrequency;
-	[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
-//    SKAction *easeMove = [SKAction moveToY:[self midiToPosition:midi] duration:0.2f];
-//    easeMove.timingMode = SKActionTimingEaseInEaseOut;
-//    [indicator runAction:easeMove];
+ 
+    return 0;
 }
 
 - (void)updateToFrequncy:(double)freqency
