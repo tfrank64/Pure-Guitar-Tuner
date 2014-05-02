@@ -7,48 +7,9 @@
 //
 
 #import "MainViewController.h"
-#import "EFCircularSlider.h"
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
 #import "MacroHelpers.h"
-
-//#define DSharp  330.5
-//#define D5      318.5
-//#define CSharp5 306.5
-//#define C5      294.5
-//#define B4      282.5
-//#define ASharp4 270.5
-//#define A4      258.5
-//#define GSharp4 246.5
-//#define G4      234.5
-#define FSharp4 370.0
-#define F4      349.2
-#define E4      329.6
-#define DSharp4 311.1
-#define D4      293.7
-#define CSharp4 277.2
-#define C4      261.6
-#define B3      246.9
-#define ASharp3 233.1
-#define A3      220.0
-#define GSharp3 207.7
-#define G3      196.0
-#define FSharp3 185.0
-#define F3      174.6
-#define E3      164.8
-#define DSharp3 155.6
-#define D3      146.8
-#define CSharp3 138.6
-#define C3      130.8
-#define B2      123.5
-#define ASharp2 116.5
-#define A2      110.0
-#define GSharp2 103.8
-#define G2      98.0
-#define FSharp2 92.50
-#define F2      87.31
-#define E2      82.41
-
 
 @interface MainViewController ()
 @end
@@ -73,14 +34,12 @@
     
     count = 0;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
     [userDefaults setInteger:4096 forKey:@"kBufferSize"];
     [userDefaults setInteger:0 forKey:@"percentageOfOverlap"];
     [userDefaults synchronize];
     
     CGRect currentFrame = self.view.frame;
     self.knobPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(currentFrame.size.width/6, currentFrame.size.width/5, currentFrame.size.width/1.5, currentFrame.size.width/1.5)];
-    //self.knobPlaceholder.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.knobPlaceholder];
     self.knobControl = [[RWKnobControl alloc] initWithFrame:self.knobPlaceholder.bounds];
     [self.knobPlaceholder addSubview:_knobControl];
@@ -88,7 +47,6 @@
     self.knobControl.lineWidth = 8.0;
     self.knobControl.pointerLength = 8.0;
     self.knobControl.tintColor = [UIColor colorWithRed:0.237 green:0.504 blue:1.000 alpha:1.000];
-    
     
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, currentFrame.size.height/1.33, currentFrame.size.width, currentFrame.size.height/4)];
     _scrollView.contentSize = CGSizeMake(currentFrame.size.width * 4, currentFrame.size.height/4);
@@ -109,41 +67,7 @@
     
     _pitchDetector = [PitchDetector sharedDetector];
     [_pitchDetector TurnOnMicrophoneTuner:self];
-    
-    /*m_scrollView = [[UIScrollView alloc] init];
-    m_scrollView.frame = CGRectMake(0, 22, self.view.bounds.size.width, self.view.bounds.size.height/2);
-    m_scrollView.contentSize = CGSizeMake(m_scrollView.frame.size.width * 4, m_scrollView.frame.size.height);
-    
-    m_scrollView.backgroundColor = rgb(36, 42, 50);
-    m_scrollView.showsVerticalScrollIndicator = NO;
-    m_scrollView.showsHorizontalScrollIndicator = NO;
-    m_scrollView.scrollEnabled = YES;
-     m_scrollView.userInteractionEnabled = NO;
-    
-    // Generate content for our scroll view using the frame height and width as the reference point
-    int i = 1;
-    int decibal = -25;
-    while (i<=11)
-    {
-        UIView *views = [[UIView alloc] initWithFrame:CGRectMake((m_scrollView.frame.size.width/3 * i), 0, 1, m_scrollView.frame.size.height/2)];
-        UILabel *tunerNumber = [[UILabel alloc] initWithFrame:CGRectMake((m_scrollView.frame.size.width/3 * i)+5, 0, 100, 20)];
-
-        tunerNumber.text = [NSString stringWithFormat:@"%d", decibal];
-        //NSLog(@"spacing: %f", m_scrollView.frame.size.width/3 * i);
-        views.backgroundColor = rgb(0, 172, 221);
-        tunerNumber.textColor = [UIColor whiteColor];
-        [views setTag:i];
-        [m_scrollView addSubview:views];
-        [m_scrollView addSubview:tunerNumber];
-        decibal += 5;
-        i++;
-    }
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(m_scrollView.frame.size.width/2, 22, 1, m_scrollView.frame.size.height)];
-    lineView.backgroundColor = [UIColor yellowColor];
-    
-    [self.view addSubview:m_scrollView];
-    [self.view insertSubview:lineView aboveSubview:m_scrollView];*/
+    _noteData = [[GTNote alloc] init];
     
     m_toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     CGRect buttonRect = m_toggleButton.frame;
@@ -157,9 +81,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {    
-    // Point is at middle of screen, subtract 160 to get to desired point (eg. 640 is middle, but 480 is exact middle)
-    // [m_scrollView setContentOffset:CGPointMake(480, 0) animated:YES];
-    
     m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
     m_currentPitchLabel.text = @"0.0";
     m_currentPitchLabel.backgroundColor = [UIColor whiteColor];
@@ -175,7 +96,7 @@
 - (void)updateFrequencyLabel
 {
     count++;
-    if (count >= 20 && self.currentFrequency <= 500.0) // Keeps tuner view from going crazy
+    if (count >= 20 && _noteData.currentFrequency <= 500.0) // Keeps tuner view from going crazy
     {
         //int page = _scrollView.contentOffset.x / _scrollView.frame.size.width;
         // update current note if in range
@@ -185,7 +106,7 @@
         //[m_scrollView setContentOffset:CGPointMake(self.currentFrequency, 0) animated:YES];
         count = 0;
     }
-	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f", self.currentFrequency];
+	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f  note: %@", _noteData.currentFrequency, _noteData.currentNote];
 	[self.currentPitchLabel setNeedsDisplay];
     
     
@@ -232,16 +153,10 @@
     }
 }
 
-- (int)calculateCurrentNote:(double)freqency
-{
- 
-    return 0;
-}
-
 - (void)updateToFrequncy:(double)freqency
 {
     //NSLog(@"CurrentFrequency: %f", freqency);
-    self.currentFrequency = freqency;
+    [_noteData calculateCurrentNote:freqency];
     [self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 }
 

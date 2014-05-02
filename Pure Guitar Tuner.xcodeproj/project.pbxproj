@@ -40,7 +40,7 @@
 		6B88E2751876203400257D0C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2741876203400257D0C /* CoreAudio.framework */; };
 		6B88E2771876204C00257D0C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2761876204C00257D0C /* AVFoundation.framework */; };
 		6B88E2791876205A00257D0C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B88E2781876205A00257D0C /* AudioToolbox.framework */; };
-		6BFA817D1911EA8F002FBA78 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA817C1911EA8F002FBA78 /* EFCircularSlider.m */; };
+		6BC3A8BC1913449300CC0E6F /* GTNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3A8BB1913449300CC0E6F /* GTNote.m */; };
 		6BFA81851911F0DD002FBA78 /* RWKnobControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA81801911F0DD002FBA78 /* RWKnobControl.m */; };
 		6BFA81861911F0DD002FBA78 /* RWKnobRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA81821911F0DD002FBA78 /* RWKnobRenderer.m */; };
 		6BFA81871911F0DD002FBA78 /* RWRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA81841911F0DD002FBA78 /* RWRotationGestureRecognizer.m */; };
@@ -114,8 +114,8 @@
 		6B88E2761876204C00257D0C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B88E2781876205A00257D0C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6B88E27A187620D600257D0C /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
-		6BFA817B1911EA8F002FBA78 /* EFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFCircularSlider.h; sourceTree = "<group>"; };
-		6BFA817C1911EA8F002FBA78 /* EFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFCircularSlider.m; sourceTree = "<group>"; };
+		6BC3A8BA1913449300CC0E6F /* GTNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTNote.h; sourceTree = "<group>"; };
+		6BC3A8BB1913449300CC0E6F /* GTNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTNote.m; sourceTree = "<group>"; };
 		6BFA817F1911F0DD002FBA78 /* RWKnobControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWKnobControl.h; sourceTree = "<group>"; };
 		6BFA81801911F0DD002FBA78 /* RWKnobControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWKnobControl.m; sourceTree = "<group>"; };
 		6BFA81811911F0DD002FBA78 /* RWKnobRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWKnobRenderer.h; sourceTree = "<group>"; };
@@ -192,18 +192,20 @@
 		6B46FD291872175B00D51922 /* Pure Guitar Tuner */ = {
 			isa = PBXGroup;
 			children = (
-				6B844AC8188DD9C90083C8A0 /* Utilities */,
-				6B844AC1188DD8510083C8A0 /* NSHelpers */,
 				6B46FD321872175B00D51922 /* AppDelegate.h */,
 				6B46FD331872175B00D51922 /* AppDelegate.m */,
-				6B46FD351872175B00D51922 /* Main_iPhone.storyboard */,
-				6B46FD381872175B00D51922 /* Main_iPad.storyboard */,
-				6B46FD3B1872175B00D51922 /* MainViewController.h */,
-				6B46FD3C1872175B00D51922 /* MainViewController.m */,
 				6B46FD3E1872175B00D51922 /* FlipsideViewController.h */,
 				6B46FD3F1872175B00D51922 /* FlipsideViewController.m */,
+				6BC3A8BA1913449300CC0E6F /* GTNote.h */,
+				6BC3A8BB1913449300CC0E6F /* GTNote.m */,
 				6B46FD411872175B00D51922 /* Images.xcassets */,
+				6B46FD381872175B00D51922 /* Main_iPad.storyboard */,
+				6B46FD351872175B00D51922 /* Main_iPhone.storyboard */,
+				6B46FD3B1872175B00D51922 /* MainViewController.h */,
+				6B46FD3C1872175B00D51922 /* MainViewController.m */,
+				6B844AC1188DD8510083C8A0 /* NSHelpers */,
 				6B46FD2A1872175B00D51922 /* Supporting Files */,
+				6B844AC8188DD9C90083C8A0 /* Utilities */,
 			);
 			path = "Pure Guitar Tuner";
 			sourceTree = "<group>";
@@ -274,8 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				6BFA817E1911F0DD002FBA78 /* RWKnob */,
-				6BFA817B1911EA8F002FBA78 /* EFCircularSlider.h */,
-				6BFA817C1911EA8F002FBA78 /* EFCircularSlider.m */,
 				6B844AC9188DD9E90083C8A0 /* MacroHelpers.h */,
 			);
 			name = Utilities;
@@ -430,6 +430,7 @@
 				6B46FD341872175B00D51922 /* AppDelegate.m in Sources */,
 				6B60BAF5187A169B00AAEBBC /* KeyHelper.m in Sources */,
 				6B7D27A2190F4DEB007B6FF4 /* test_1_8192_0.m in Sources */,
+				6BC3A8BC1913449300CC0E6F /* GTNote.m in Sources */,
 				6B60BAF6187A169B00AAEBBC /* RIOInterface.mm in Sources */,
 				6BFA81861911F0DD002FBA78 /* RWKnobRenderer.m in Sources */,
 				6B46FD3D1872175B00D51922 /* MainViewController.m in Sources */,
@@ -443,7 +444,6 @@
 				6BFA81851911F0DD002FBA78 /* RWKnobControl.m in Sources */,
 				6B46FD301872175B00D51922 /* main.m in Sources */,
 				6BFA81871911F0DD002FBA78 /* RWRotationGestureRecognizer.m in Sources */,
-				6BFA817D1911EA8F002FBA78 /* EFCircularSlider.m in Sources */,
 				6B844AC4188DD8930083C8A0 /* UIAlertViewHelper.m in Sources */,
 				6B844AC7188DD8DD0083C8A0 /* NSStringHelper.m in Sources */,
 				6B7D27A4190F4DEB007B6FF4 /* test_1_16384_0.m in Sources */,

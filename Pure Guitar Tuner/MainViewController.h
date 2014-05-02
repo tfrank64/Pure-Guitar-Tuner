@@ -7,6 +7,7 @@
 //
 
 #import "FlipsideViewController.h"
+#import "GTNote.h"
 #import "PitchDetector.h"
 #import "RWKnobControl.h"
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 @property (strong, nonatomic) RWKnobControl *knobControl;
 @property (strong, nonatomic) UIView *knobPlaceholder;
+@property (strong, nonatomic) GTNote *noteData;
 
 
 @property (nonatomic, retain) UILabel *currentPitchLabel;
