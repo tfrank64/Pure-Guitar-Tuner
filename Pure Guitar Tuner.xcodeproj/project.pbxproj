@@ -24,6 +24,7 @@
 		6B46FD4B1872175B00D51922 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B46FD271872175B00D51922 /* UIKit.framework */; };
 		6B46FD531872175B00D51922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B46FD511872175B00D51922 /* InfoPlist.strings */; };
 		6B46FD551872175B00D51922 /* Pure_Guitar_TunerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B46FD541872175B00D51922 /* Pure_Guitar_TunerTests.m */; };
+		6B53D45819143D5500D25993 /* FBKVOController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B53D45719143D5500D25993 /* FBKVOController.m */; };
 		6B60BAED187A167000AAEBBC /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAEB187A167000AAEBBC /* CAXException.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF0187A167F00AAEBBC /* SafeSoundAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAEF187A167F00AAEBBC /* SafeSoundAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6B60BAF5187A169B00AAEBBC /* KeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B60BAF2187A169B00AAEBBC /* KeyHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -81,6 +82,8 @@
 		6B46FD501872175B00D51922 /* Pure Guitar TunerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pure Guitar TunerTests-Info.plist"; sourceTree = "<group>"; };
 		6B46FD521872175B00D51922 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6B46FD541872175B00D51922 /* Pure_Guitar_TunerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pure_Guitar_TunerTests.m; sourceTree = "<group>"; };
+		6B53D45619143D5500D25993 /* FBKVOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBKVOController.h; sourceTree = "<group>"; };
+		6B53D45719143D5500D25993 /* FBKVOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBKVOController.m; sourceTree = "<group>"; };
 		6B60BAE9187A167000AAEBBC /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		6B60BAEA187A167000AAEBBC /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
 		6B60BAEB187A167000AAEBBC /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 		6B844AC8188DD9C90083C8A0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6B53D45619143D5500D25993 /* FBKVOController.h */,
+				6B53D45719143D5500D25993 /* FBKVOController.m */,
 				6BFA817E1911F0DD002FBA78 /* RWKnob */,
 				6B844AC9188DD9E90083C8A0 /* MacroHelpers.h */,
 			);
@@ -434,6 +439,7 @@
 				6B60BAF6187A169B00AAEBBC /* RIOInterface.mm in Sources */,
 				6BFA81861911F0DD002FBA78 /* RWKnobRenderer.m in Sources */,
 				6B46FD3D1872175B00D51922 /* MainViewController.m in Sources */,
+				6B53D45819143D5500D25993 /* FBKVOController.m in Sources */,
 				6B7D27A1190F4DEB007B6FF4 /* test_1_4096_50.m in Sources */,
 				6B7D27A5190F4DEB007B6FF4 /* test_1_16384_50.m in Sources */,
 				6B46FD401872175B00D51922 /* FlipsideViewController.m in Sources */,

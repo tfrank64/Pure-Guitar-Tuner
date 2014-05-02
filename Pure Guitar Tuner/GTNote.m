@@ -85,9 +85,9 @@
         self.currentNote = @"F";
     } else if (freqency < F2 && freqency > DSharp2) {
         self.currentNote = @"E";
-    } else {
+    } /*else if (![self.currentNote isEqualToString:@"-"]){
         self.currentNote = @"-";
-    }
+    }*/
     
     self.currentFrequency = freqency;
 }

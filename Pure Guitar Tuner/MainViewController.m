@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "FlipsideViewController.h"
 #import "KeyHelper.h"
+#import "FBKVOController.h"
 #import "MacroHelpers.h"
 
 @interface MainViewController ()
@@ -18,9 +19,8 @@
 {
     int count;
     UIButton *m_toggleButton;
+    FBKVOController *_KVOController;
 }
-
-@synthesize currentPitchLabel = m_currentPitchLabel;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -65,10 +65,6 @@
         i++;
     }
     
-    _pitchDetector = [PitchDetector sharedDetector];
-    [_pitchDetector TurnOnMicrophoneTuner:self];
-    _noteData = [[GTNote alloc] init];
-    
     m_toggleButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     CGRect buttonRect = m_toggleButton.frame;
     buttonRect.origin.x = self.view.frame.size.width-buttonRect.size.width - 8;
@@ -77,20 +73,53 @@
     
     [m_toggleButton addTarget:self action:@selector(togglePopover:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:m_toggleButton];
+    
+    _noteDisplay = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2.65, self.view.frame.size.width/2.65, 80, 80)];
+    [_noteDisplay setText:@"-"];
+    [_noteDisplay setTextColor:[UIColor whiteColor]];
+    [_noteDisplay setTextAlignment:NSTextAlignmentCenter];
+    [_noteDisplay setFont:[UIFont boldSystemFontOfSize:40.0f]];
+    //[noteDisplay setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:_noteDisplay];
+    
+    // Load data components
+    _pitchDetector = [PitchDetector sharedDetector];
+    [_pitchDetector TurnOnMicrophoneTuner:self];
+    _noteData = [[GTNote alloc] init];
+    
+    _KVOController = [FBKVOController controllerWithObserver:self];
+    [_KVOController observe:_noteData keyPath:@"currentNote" options:NSKeyValueObservingOptionNew block:^(MainViewController *observer, GTNote *object, NSDictionary *change) {
+        NSLog(@"Changed: %@", change[NSKeyValueChangeNewKey]);
+        _noteDisplay.text = object.currentNote;
+        [self updateFrequencyLabel];
+    }];
+    
+    [_KVOController observe:_noteData keyPath:@"currentFrequency" options:NSKeyValueObservingOptionNew block:^(MainViewController *observer, GTNote *object, NSDictionary *change) {
+        NSLog(@"FreqChange: %@", change[NSKeyValueChangeNewKey]);
+        [_freqencyDisplay setText:[NSString stringWithFormat:@"%f", object.currentFrequency]];
+        [self updateNote];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {    
-    m_currentPitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
-    m_currentPitchLabel.text = @"0.0";
-    m_currentPitchLabel.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:m_currentPitchLabel];
+    _freqencyDisplay = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
+    _freqencyDisplay.text = @"0.0";
+    _freqencyDisplay.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_freqencyDisplay];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    m_currentPitchLabel = nil;
+    _noteDisplay = nil;
+    _freqencyDisplay = nil;
     [super viewDidDisappear:animated];
+}
+
+- (void)updateNote
+{
+    [_noteDisplay setNeedsDisplay];
+    [self.freqencyDisplay setNeedsDisplay];
 }
 
 - (void)updateFrequencyLabel
@@ -99,17 +128,19 @@
     if (count >= 20 && _noteData.currentFrequency <= 500.0) // Keeps tuner view from going crazy
     {
         //int page = _scrollView.contentOffset.x / _scrollView.frame.size.width;
-        // update current note if in range
-        // update ui of freqency within range
+
         CGFloat randomValue = (arc4random() % 101) / 100.f;
         [self.knobControl setValue:randomValue animated:YES];
-        //[m_scrollView setContentOffset:CGPointMake(self.currentFrequency, 0) animated:YES];
         count = 0;
     }
-	self.currentPitchLabel.text = [NSString stringWithFormat:@"%f  note: %@", _noteData.currentFrequency, _noteData.currentNote];
-	[self.currentPitchLabel setNeedsDisplay];
-    
-    
+	[_freqencyDisplay setNeedsDisplay];
+}
+
+- (void)updateToFrequncy:(double)freqency
+{
+    //NSLog(@"CurrentFrequency: %f", freqency);
+    [_noteData calculateCurrentNote:freqency];
+    //[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 }
 
 #pragma mark - Flipside View Controller
@@ -151,13 +182,6 @@
             [self presentViewController:flipSideViewController animated:YES completion:nil];
         }
     }
-}
-
-- (void)updateToFrequncy:(double)freqency
-{
-    //NSLog(@"CurrentFrequency: %f", freqency);
-    [_noteData calculateCurrentNote:freqency];
-    [self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 }
 
 - (void)dealloc
