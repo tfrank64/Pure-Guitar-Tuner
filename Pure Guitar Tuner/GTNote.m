@@ -53,7 +53,11 @@
 
 - (void)calculateCurrentNote:(double)freqency
 {
-    if (freqency < FSharp4 && freqency > E4) {
+    self.minFrequency = DSharp3;
+    self.targetFrequency = E3;
+    self.maxFreqency = F3;
+    // TODO: make it only change if different
+    if (freqency < FSharp4 && freqency > E4 && ![self.currentNote isEqualToString:@"F"]) {
         self.currentNote = @"F";
     } else if (freqency < F4 && freqency > DSharp4) {
         self.currentNote = @"E";

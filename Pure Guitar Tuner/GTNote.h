@@ -13,6 +13,10 @@
 @property (nonatomic, assign) double currentFrequency;
 @property (nonatomic, strong) NSString *currentNote;
 
+@property (nonatomic, assign) double minFrequency;
+@property (nonatomic, assign) double targetFrequency;
+@property (nonatomic, assign) double maxFreqency;
+
 - (void)calculateCurrentNote:(double)freqency;
 
 @end

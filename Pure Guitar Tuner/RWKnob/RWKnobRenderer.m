@@ -45,19 +45,13 @@
     [triPointer moveToPoint:CGPointMake(CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, CGRectGetHeight(self.pointerLayer.bounds) / 2.f)];
 //    NSLog(@"Line: %f and %f", CGRectGetWidth(self.pointerLayer.bounds) + 10, CGRectGetHeight(self.pointerLayer.bounds) / 1.95f);
     [triPointer addLineToPoint:CGPointMake(CGRectGetWidth(self.pointerLayer.bounds) + 10, floorf(CGRectGetHeight(self.pointerLayer.bounds) / 1.95f))];
-    NSLog(@"Line: %f and %f", CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, floorf(CGRectGetHeight(self.pointerLayer.bounds) / 1.85f));
-        [triPointer addLineToPoint:CGPointMake(CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, floorf(CGRectGetHeight(self.pointerLayer.bounds) / 1.90f))];
-    //[triPointer closePath];
-    //[triPointer fill];
-    
-    //[triPointer moveToPoint:CGPointMake(152, 80)];
-    //[triPointer addLineToPoint:CGPointMake(170, 83)];
-    //[triPointer addLineToPoint:CGPointMake(152, 86)];
-    [triPointer closePath];
+    //NSLog(@"Line: %f and %f", CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, floorf(CGRectGetHeight(self.pointerLayer.bounds) / 1.85f));
+    [triPointer addLineToPoint:CGPointMake(CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, floorf(CGRectGetHeight(self.pointerLayer.bounds) / 1.90f))];
+
+    [triPointer moveToPoint:CGPointMake(CGRectGetWidth(self.pointerLayer.bounds) - self.pointerLength, CGRectGetHeight(self.pointerLayer.bounds) / 2.f)];
+
     [triPointer fill];
     self.pointerLayer.path = [triPointer CGPath];
-    
-    //self.pointerLayer.path = [pointer CGPath];
 }
 
 #pragma mark - Property overrides

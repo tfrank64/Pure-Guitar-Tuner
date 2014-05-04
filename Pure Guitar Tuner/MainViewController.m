@@ -44,9 +44,10 @@
     self.knobControl = [[RWKnobControl alloc] initWithFrame:self.knobPlaceholder.bounds];
     [self.knobPlaceholder addSubview:_knobControl];
     
-    self.knobControl.lineWidth = 8.0;
+    self.knobControl.lineWidth = 4.5;
     self.knobControl.pointerLength = 8.0;
     self.knobControl.tintColor = [UIColor colorWithRed:0.237 green:0.504 blue:1.000 alpha:1.000];
+    [self.knobControl setValue:0.05 animated:NO];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, currentFrame.size.height/1.33, currentFrame.size.width, currentFrame.size.height/4)];
     _scrollView.contentSize = CGSizeMake(currentFrame.size.width * 4, currentFrame.size.height/4);
@@ -82,6 +83,11 @@
     //[noteDisplay setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:_noteDisplay];
     
+    _freqencyDisplay = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
+    _freqencyDisplay.text = @"0.0";
+    _freqencyDisplay.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_freqencyDisplay];
+    
     // Load data components
     _pitchDetector = [PitchDetector sharedDetector];
     [_pitchDetector TurnOnMicrophoneTuner:self];
@@ -90,23 +96,13 @@
     _KVOController = [FBKVOController controllerWithObserver:self];
     [_KVOController observe:_noteData keyPath:@"currentNote" options:NSKeyValueObservingOptionNew block:^(MainViewController *observer, GTNote *object, NSDictionary *change) {
         NSLog(@"Changed: %@", change[NSKeyValueChangeNewKey]);
-        _noteDisplay.text = object.currentNote;
-        [self updateFrequencyLabel];
+        [self performSelectorInBackground:@selector(updateNoteLabel) withObject:nil];
     }];
-    
-    [_KVOController observe:_noteData keyPath:@"currentFrequency" options:NSKeyValueObservingOptionNew block:^(MainViewController *observer, GTNote *object, NSDictionary *change) {
-        NSLog(@"FreqChange: %@", change[NSKeyValueChangeNewKey]);
-        [_freqencyDisplay setText:[NSString stringWithFormat:@"%f", object.currentFrequency]];
-        [self updateNote];
-    }];
-}
 
-- (void)viewDidAppear:(BOOL)animated
-{    
-    _freqencyDisplay = [[UILabel alloc] initWithFrame:CGRectMake(50, 300, 200, 44)];
-    _freqencyDisplay.text = @"0.0";
-    _freqencyDisplay.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_freqencyDisplay];
+    [_KVOController observe:_noteData keyPath:@"currentFrequency" options:NSKeyValueObservingOptionNew block:^(MainViewController *observer, GTNote *object, NSDictionary *change) {
+        //NSLog(@"FreqChange: %@", change[NSKeyValueChangeNewKey]);
+        [self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
+    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -116,31 +112,55 @@
     [super viewDidDisappear:animated];
 }
 
-- (void)updateNote
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"currentNote"])
+//    {
+//        NSLog(@"FreqChange: %@", change[NSKeyValueChangeNewKey]);
+//        [self performSelectorInBackground:@selector(updateNote) withObject:nil];
+//        //[_noteDisplay setNeedsDisplay];
+//    }
+//    else
+//        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//}
+
+- (void)updateNoteLabel
 {
-    [_noteDisplay setNeedsDisplay];
-    [self.freqencyDisplay setNeedsDisplay];
+    _noteDisplay.text = _noteData.currentNote;
 }
 
 - (void)updateFrequencyLabel
 {
+    _freqencyDisplay.text = [NSString stringWithFormat:@"%f", _noteData.currentFrequency];
+    self.knobControl.minimumValue = _noteData.minFrequency;
+    self.knobControl.maximumValue = _noteData.maxFreqency;
+    
     count++;
-    if (count >= 20 && _noteData.currentFrequency <= 500.0) // Keeps tuner view from going crazy
+    if (count >= 20 && _noteData.currentFrequency > _noteData.minFrequency && _noteData.currentFrequency < _noteData.maxFreqency) // Keeps tuner view from going crazy
     {
-        //int page = _scrollView.contentOffset.x / _scrollView.frame.size.width;
-
-        CGFloat randomValue = (arc4random() % 101) / 100.f;
-        [self.knobControl setValue:randomValue animated:YES];
-        count = 0;
+        // todo: pointer is off the middle, need to adjust
+        [self.knobControl setValue:_noteData.currentFrequency animated:YES];
     }
-	[_freqencyDisplay setNeedsDisplay];
 }
+
+//- (void)updateFrequencyLabel
+//{
+//    count++;
+//    if (count >= 20 && _noteData.currentFrequency <= 500.0) // Keeps tuner view from going crazy
+//    {
+//        //int page = _scrollView.contentOffset.x / _scrollView.frame.size.width;
+//
+//        CGFloat randomValue = (arc4random() % 101) / 100.f;
+//        [self.knobControl setValue:randomValue animated:YES];
+//        count = 0;
+//    }
+//	[_freqencyDisplay setNeedsDisplay];
+//}
 
 - (void)updateToFrequncy:(double)freqency
 {
     //NSLog(@"CurrentFrequency: %f", freqency);
     [_noteData calculateCurrentNote:freqency];
-    //[self performSelectorInBackground:@selector(updateFrequencyLabel) withObject:nil];
 }
 
 #pragma mark - Flipside View Controller
