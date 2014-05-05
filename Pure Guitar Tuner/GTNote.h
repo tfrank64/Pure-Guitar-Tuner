@@ -16,6 +16,7 @@
 @property (nonatomic, assign) double minFrequency;
 @property (nonatomic, assign) double targetFrequency;
 @property (nonatomic, assign) double maxFreqency;
+@property (nonatomic, assign) double previousFrequency;
 
 - (void)calculateCurrentNote:(double)freqency;
 
