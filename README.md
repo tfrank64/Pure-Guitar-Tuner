@@ -3,6 +3,8 @@ Pure Guitar Tuner
 
 The idea was to create a simple yet beautiful (free) guitar tuner for iOS that works amazingly. As a guitar player, I am disappointed by the free guitar tuners on the App Store, so here is the proposed remedy.
 
+Pure Guitar Tuner [Google Group](https://groups.google.com/forum/#!forum/pure-guitar-tuner) for interest.
+
 ### Screenshot
 
 <p align="center">
