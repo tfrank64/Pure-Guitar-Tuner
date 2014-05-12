@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "FlipsideViewController.h"
-#import "KeyHelper.h"
 #import "FBKVOController.h"
 #import "MacroHelpers.h"
 
@@ -129,7 +128,6 @@
     count++;
     if (count >= 5 && _noteData.currentFrequency > _noteData.minFrequency && _noteData.currentFrequency < _noteData.maxFreqency) // Keeps tuner view from going crazy
     {
-        // todo: pointer is off the middle, need to adjust
         [self.knobControl setValue:_noteData.currentFrequency animated:YES];
         count = 0;
     }

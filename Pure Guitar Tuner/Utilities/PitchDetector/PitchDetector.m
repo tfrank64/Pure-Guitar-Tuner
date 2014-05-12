@@ -5,24 +5,9 @@
 //  Created by Edward on 1/1/14.
 //  Copyright (c) 2014 Edward. All rights reserved.
 //
+
 #import "PitchDetector.h"
-//#import "Coaching.h"
-
-#import "test_1_4096_0.h"
-#import "test_1_4096_50.h"
-#import "test_1_8192_0.h"
-#import "test_1_8192_50.h"
-#import "test_1_16384_0.h"
-#import "test_1_16384_50.h"
 #import "MainViewController.h"
-
-//#import "test_2_Fly_Me_To_The_Moon.h"
-//#import "test_4_My_Heart_Will_Go_On.h"
-//
-//#import "test_3_Major_Scale.h"
-//#import "test_3_Minor_Scale.h"
-//#import "test_3_Arpeggios.h"
-//#import "test_3_Arpeggios_7th.h"
 
 @implementation PitchDetector
 {
@@ -317,14 +302,7 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
 	PitchDetector* THIS = (__bridge PitchDetector *)inRefCon;
     
     /*------------Obtain Engine Parameters-----------------*/
-    // Coaching *UI = THIS->UI;
-    
-    test_1_4096_0 *test_1_4096_0UI = THIS->test_1_4096_0UI;
-    test_1_4096_50 *test_1_4096_50UI = THIS->test_1_4096_50UI;
-    test_1_8192_0 *test_1_8192_0UI = THIS->test_1_8192_0UI;
-    test_1_8192_50 *test_1_8192_50UI = THIS->test_1_8192_50UI;
-    test_1_16384_0 *test_1_16384_0UI = THIS->test_1_16384_0UI;
-    test_1_16384_50 *test_1_16384_50UI = THIS->test_1_16384_50UI;
+
     MainViewController *mainViewPitch = THIS->mainViewPitch;
     
     FFTSetup fftSetup = THIS->fftSetup;
@@ -456,22 +434,8 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
         
 //        NSLog(@"%f %f %d %d %@", runningTime, frequency, bin, midiNum, pitch);
         
-        // if(UI != nil)                                   [UI moveIndicatorByMIDI:midiNum];
-        if(test_1_4096_0UI != nil)                      [test_1_4096_0UI moveIndicatorByMIDI:midiNum];
-        if(test_1_4096_50UI != nil)                     [test_1_4096_50UI moveIndicatorByMIDI:midiNum];
-        if(test_1_8192_0UI != nil)                      [test_1_8192_0UI moveIndicatorByMIDI:midiNum];
-        if(test_1_8192_50UI != nil)                     [test_1_8192_50UI moveIndicatorByMIDI:midiNum];
-        if(test_1_16384_0UI != nil)                     [test_1_16384_0UI moveIndicatorByMIDI:midiNum];
-        if(test_1_16384_50UI != nil)                    [test_1_16384_50UI moveIndicatorByMIDI:midiNum];
         if(mainViewPitch != nil)                        [mainViewPitch updateToFrequncy:frequency]; //[mainViewPitch moveIndicatorByMIDI:midiNum];
-        
-//        if(test_2_Fly_Me_To_The_MoonUI != nil)          [test_2_Fly_Me_To_The_MoonUI moveIndicatorByMIDI:midiNum];
-//        if(test_4_My_Heart_Will_Go_OnUI != nil)         [test_4_My_Heart_Will_Go_OnUI moveIndicatorByMIDI:midiNum];
-//        
-//        if(test_3_Major_ScaleUI != nil)                 [test_3_Major_ScaleUI moveIndicatorByMIDI:midiNum];
-//        if(test_3_Minor_ScaleUI != nil)                 [test_3_Minor_ScaleUI moveIndicatorByMIDI:midiNum];
-//        if(test_3_ArpeggiosUI != nil)                   [test_3_ArpeggiosUI moveIndicatorByMIDI:midiNum];
-//        if(test_3_Arpeggios_7thUI != nil)               [test_3_Arpeggios_7thUI moveIndicatorByMIDI:midiNum];
+
         /*---------------------Method: Product of FFT and Cepstrum---------------------(END)*/
         
         // free all temporary storage and clear outputBuffer;

@@ -8,18 +8,11 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "RIOInterface.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Remote IO setup
-    RIOInterface *rioRef = [RIOInterface sharedInstance];
-    rioRef.sampleRate = 44100;
-    rioRef.frequency = 294;
-    [rioRef initializeAudioSession];
-    
+{    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *mainViewController = [[MainViewController alloc] init];
     //UINavigationController *navViewController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
