@@ -487,7 +487,7 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
                 
                 THIS->index += remain;
                 
-                NSLog(@"THIS->index Should equal to bufferCapacity, check  %zu:%d", THIS->index, bufferCapacity);
+                NSLog(@"THIS->index Should equal to bufferCapacity, check  %zu:%zu", THIS->index, bufferCapacity);
             }
         }
         
@@ -572,8 +572,8 @@ void ConvertInt16ToFloat(PitchDetector* THIS, void *buf, float *outputBuf, size_
     NSLog (@"  n:                      %d",   n);
     NSLog (@"  nOver2:                 %d",   nOver2);
     NSLog (@"  sampleRate:             %f",   sampleRate);
-    NSLog (@"  percentageOfOverlap:    %d",   percentageOfOverlap);
-    NSLog (@"  kBufferSize:            %d",   kBufferSize);
+    NSLog (@"  percentageOfOverlap:    %ld",   percentageOfOverlap);
+    NSLog (@"  kBufferSize:            %ld",   kBufferSize);
 }
 - (void)printASBD:(AudioStreamBasicDescription)asbd
 {

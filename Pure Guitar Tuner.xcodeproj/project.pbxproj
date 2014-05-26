@@ -488,17 +488,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pure Guitar Tuner/Pure Guitar Tuner-Prefix.pch";
 				INFOPLIST_FILE = "Pure Guitar Tuner/Pure Guitar Tuner-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -509,17 +503,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pure Guitar Tuner/Pure Guitar Tuner-Prefix.pch";
 				INFOPLIST_FILE = "Pure Guitar Tuner/Pure Guitar Tuner-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/taylorfranklin/dev/Pure-Guitar-Tuner",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
